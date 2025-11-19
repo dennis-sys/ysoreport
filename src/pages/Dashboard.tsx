@@ -181,7 +181,7 @@ export function Dashboard() {
 
         <button
           onClick={exportReportToPdf}
-          className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl z-50"
+          className="fixed bottom-4 left-4 sm:bottom-8 sm:left-8 flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl z-50"
           title="Download Report as PDF"
         >
           <Download className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
