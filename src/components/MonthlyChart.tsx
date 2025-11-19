@@ -17,7 +17,7 @@ export function MonthlyChart({ data }: MonthlyChartProps) {
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 sm:p-6 min-w-full">
-      <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-4 sm:mb-6">Year 2025/2026 YSO Registration Progress</h3>
+      <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-4 sm:mb-6">Year 2025/26 YSO Registration Progress</h3>
       <div className="space-y-4 overflow-x-auto">
         <svg width="100%" height={chartHeight} viewBox={`0 0 ${(barWidth + gap) * data.length + gap} ${chartHeight}`} className="overflow-visible min-w-max">
           {data.map((item, index) => {

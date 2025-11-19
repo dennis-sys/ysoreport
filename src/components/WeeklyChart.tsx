@@ -23,7 +23,7 @@ export function WeeklyChart({ data }: WeeklyChartProps) {
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 sm:p-6 min-w-full">
-      <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-4 sm:mb-6">September 2025 Registered YSOs</h3>
+      <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-4 sm:mb-6">November 2025 Registered YSOs</h3>
       <div className="space-y-4 overflow-x-auto">
         <svg width="100%" height={chartHeight} viewBox={`0 0 ${totalWidth} ${chartHeight}`} className="overflow-visible min-w-max">
           <defs>
