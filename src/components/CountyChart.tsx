@@ -10,8 +10,8 @@ export function CountyChart({ data }: CountyChartProps) {
   const maxValue = Math.max(...topCounties.map(d => d.count));
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 sm:p-6 min-w-full">
-      <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-4 sm:mb-6">Top 10 Counties by YSO Registration</h3>
+    <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 sm:p-6 min-w-full print:shadow-none print:border print:p-4">
+      <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-4 sm:mb-6 print:text-base print:mb-3">Top 10 Counties by YSO Registration</h3>
       <div className="space-y-2 sm:space-y-3">
         {topCounties.map((county) => (
           <div key={county.id} className="flex items-center gap-2 sm:gap-4">

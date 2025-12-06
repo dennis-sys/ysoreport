@@ -123,8 +123,21 @@ export function Dashboard() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8 relative">
-        <div id="dashboard-report" className="bg-white rounded-lg p-4 sm:p-6 lg:p-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8">
+        <div id="dashboard-report" className="bg-white p-4 sm:p-6 lg:p-8" style={{ pageBreakInside: 'avoid' }}>
+          <div className="mb-6 pb-4 border-b border-slate-200 print:mb-4 print:pb-3">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">YSO REGISTRATION REPORT</h1>
+                <p className="text-sm text-slate-600 mt-1">National Youth Council Kenya</p>
+              </div>
+              <div className="text-right print:text-sm">
+                <p className="text-xs sm:text-sm text-slate-600">Report Date & Time</p>
+                <p className="text-sm sm:text-base font-semibold text-slate-900 font-mono">{currentTime || 'Loading...'}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8 print:gap-3 print:mb-6">
             <StatCard
               title="Weekly Registrations"
               value={weeklyCount}
@@ -149,33 +162,31 @@ export function Dashboard() {
             />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
-            <div className="overflow-x-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8 print:gap-4 print:mb-6" style={{ pageBreakInside: 'avoid' }}>
+            <div className="overflow-x-auto print:overflow-visible">
               <MonthlyChart data={monthlyData} />
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto print:overflow-visible">
               <WeeklyChart data={weeklyData} />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
-            <div className="overflow-x-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8 print:gap-4 print:mb-6" style={{ pageBreakInside: 'avoid' }}>
+            <div className="overflow-x-auto print:overflow-visible">
               <CountyChart data={countyData} />
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto print:overflow-visible">
               <GrowthTable data={growthData} />
             </div>
           </div>
 
-          <div className="mb-6 sm:mb-8 overflow-x-auto">
+          <div className="mb-6 sm:mb-8 overflow-x-auto print:overflow-visible print:mb-6" style={{ pageBreakInside: 'avoid' }}>
             <SectorChart data={sectorData} />
           </div>
 
-          <footer className="mt-12 py-6 border-t border-slate-200">
-            <div className="text-center text-sm text-slate-600">
-              <p className="font-medium">National Youth Council Kenya</p>
-              <p className="mt-1">Amplifying the Youth Voice</p>
-            </div>
+          <footer className="mt-8 sm:mt-12 pt-4 sm:pt-6 border-t border-slate-200 print:mt-6 print:pt-4 text-center text-xs sm:text-sm text-slate-600">
+            <p className="font-medium">National Youth Council Kenya</p>
+            <p className="mt-1">Amplifying the Youth Voice</p>
           </footer>
         </div>
 

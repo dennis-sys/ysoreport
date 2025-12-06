@@ -20,8 +20,8 @@ export function SectorChart({ data }: SectorChartProps) {
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 sm:p-6 min-w-full">
-      <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-4 sm:mb-6">YSOs by Sector Working Group</h3>
+    <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 sm:p-6 min-w-full print:shadow-none print:border print:p-4">
+      <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-4 sm:mb-6 print:text-base print:mb-3">YSOs by Sector Working Group</h3>
       <div className="space-y-2 sm:space-y-3">
         {sortedData.map((sector, index) => (
           <div key={sector.id} className="flex items-center gap-2 sm:gap-4 flex-wrap">

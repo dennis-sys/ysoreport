@@ -8,10 +8,10 @@ export async function exportReportToPdf() {
   }
 
   const opt = {
-    margin: 10,
+    margin: [8, 10, 8, 10],
     filename: 'YSO-Registration-Report.pdf',
     image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
+    html2canvas: { scale: 2, useCORS: true, logging: false },
     jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' },
     pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
   };
