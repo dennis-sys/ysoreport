@@ -127,11 +127,11 @@ export function Dashboard() {
           <div className="mb-6 pb-4 border-b border-slate-200 print:mb-4 print:pb-3">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">YSO REGISTRATION REPORT</h1>
-                <p className="text-sm text-slate-600 mt-1">National Youth Council Kenya</p>
+                //<h1 className="text-2xl sm:text-3xl font-bold text-slate-900">YSO REGISTRATION REPORT</h1>//
+               // <p className="text-sm text-slate-600 mt-1">National Youth Council Kenya</p>//
               </div>
               <div className="text-right print:text-sm">
-                <p className="text-xs sm:text-sm text-slate-600">Report Date & Time</p>
+               // <p className="text-xs sm:text-sm text-slate-600">Report Date & Time</p>//
                 <p className="text-sm sm:text-base font-semibold text-slate-900 font-mono">{currentTime || 'Loading...'}</p>
               </div>
             </div>
