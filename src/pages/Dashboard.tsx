@@ -114,7 +114,8 @@ export function Dashboard() {
             </div>
             <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
               <div className="text-right">
-   
+   <p className="text-xs sm:text-sm text-slate-600">Report Date & Time</p>
+<p className="text-sm sm:text-lg font-semibold text-slate-900 font-mono whitespace-nowrap">{currentTime || 'Loading...'}</p>
                
               </div>
             </div>
