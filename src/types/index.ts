@@ -13,6 +13,7 @@ export interface WeeklyRegistration {
   start_date: string;
   end_date: string;
   created_at: string;
+  sort_order: number;
 }
 
 export interface CountyRegistration {

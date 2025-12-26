@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Plus, Pencil, Trash2, Save, X } from 'lucide-react';
+import { Plus, Pencil, Trash2, Save, X, GripVertical } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { WeeklyRegistration } from '../../types';
 
@@ -7,6 +7,7 @@ export function WeeklyEditor() {
   const [data, setData] = useState<WeeklyRegistration[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [draggedId, setDraggedId] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     date_range: '',
     count: 0,
@@ -23,7 +24,7 @@ export function WeeklyEditor() {
     const { data: records } = await supabase
       .from('weekly_registrations')
       .select('*')
-      .order('start_date');
+      .order('sort_order');
     if (records) setData(records);
     setLoading(false);
   }
@@ -31,7 +32,7 @@ export function WeeklyEditor() {
   const handleAdd = async () => {
     const { error } = await supabase
       .from('weekly_registrations')
-      .insert([formData]);
+      .insert([{ ...formData, sort_order: data.length }]);
 
     if (!error) {
       await fetchData();
@@ -78,6 +79,53 @@ export function WeeklyEditor() {
     setEditingId(null);
     setIsAdding(false);
     setFormData({ date_range: '', count: 0, start_date: '', end_date: '' });
+  };
+
+  const handleDragStart = (id: string) => {
+    setDraggedId(id);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleDrop = async (targetId: string) => {
+    if (!draggedId || draggedId === targetId) {
+      setDraggedId(null);
+      return;
+    }
+
+    const draggedIndex = data.findIndex(item => item.id === draggedId);
+    const targetIndex = data.findIndex(item => item.id === targetId);
+
+    if (draggedIndex === -1 || targetIndex === -1) {
+      setDraggedId(null);
+      return;
+    }
+
+    const newData = [...data];
+    [newData[draggedIndex], newData[targetIndex]] = [newData[targetIndex], newData[draggedIndex]];
+
+    setData(newData);
+
+    const updates = newData.map((item, index) => ({
+      id: item.id,
+      sort_order: index,
+    }));
+
+    for (const update of updates) {
+      await supabase
+        .from('weekly_registrations')
+        .update({ sort_order: update.sort_order })
+        .eq('id', update.id);
+    }
+
+    setDraggedId(null);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedId(null);
   };
 
   if (loading) return <div>Loading...</div>;
@@ -158,7 +206,19 @@ export function WeeklyEditor() {
 
       <div className="space-y-2">
         {data.map((record) => (
-          <div key={record.id} className="bg-white border border-slate-200 rounded-lg p-4">
+          <div
+            key={record.id}
+            draggable={editingId !== record.id}
+            onDragStart={() => handleDragStart(record.id)}
+            onDragOver={handleDragOver}
+            onDrop={() => handleDrop(record.id)}
+            onDragEnd={handleDragEnd}
+            className={`bg-white border rounded-lg p-4 transition-all ${
+              draggedId === record.id
+                ? 'opacity-50 border-blue-400 bg-blue-50'
+                : 'border-slate-200 hover:border-slate-300'
+            } ${editingId !== record.id ? 'cursor-move' : ''}`}
+          >
             {editingId === record.id ? (
               <div>
                 <div className="grid grid-cols-2 gap-4 mb-4">
@@ -217,12 +277,15 @@ export function WeeklyEditor() {
                 </div>
               </div>
             ) : (
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-slate-900">{record.date_range}</p>
-                  <p className="text-sm text-slate-600">Registrations: {record.count}</p>
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3 flex-1">
+                  <GripVertical className="w-5 h-5 text-slate-400 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium text-slate-900">{record.date_range}</p>
+                    <p className="text-sm text-slate-600">Registrations: {record.count}</p>
+                  </div>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 flex-shrink-0">
                   <button
                     onClick={() => startEdit(record)}
                     className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg"
